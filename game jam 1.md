@@ -1,0 +1,36 @@
+I've always been a gaming fan and kept an eye on the games industry, but the one and only game I've written was a [silly two player pong game][2] for a just-for-fun class senior year of college (taught by the excellent [Joe McKay][3]). So, when my friend [Lily][4] asked if I wanted to apply my [Android experience][5] to coding a game for the [OUYA/Kill Screen CREATE Game Jam][1], I decided to take a chance on learning a bit more about this whole game programming thing.
+
+Lily already had a vague gameplay idea, working title Noah's Art, where the player would switch color filters which would effect how they could interact with differently colored objects in a top-down world. Her friend [Josh][6] joined in to help with gameplay design. I started by researching different game engines for Android. Of the simple open source Android libraries, [LibGDX][7] seemed the best maintained, had the most community support, and good 2d support. Then there's [Unity][8], a very popular commercial library that supports every platform under the sun, is a sponsor of the jam, and looks like it does a lot of work for you if you can figure out how to use it. In the end the deciding factor wound up being the wifi at the coffee shop I was working at on Monday: the 1GB+ Unity download kept getting cut off. I was also concerned about the hefty price tag on Unity, while LibGDX let me avoid those concerns.
+
+[1]: http://killscreendaily.com/create/
+[2]: http://alex.turnlav.net/pong/
+[3]: http://www.joemckaystudio.com/
+[4]: http://lilycheng.com/
+[5]: http://www.yelp.com/yelpmobile
+[6]: http://joshleejosh.com/
+[7]: http://libgdx.badlogicgames.com/
+[8]: http://unity3d.com/
+
+[caption id="attachment_21" align="alignnone" width="300"]<a href="http://alexp.files.wordpress.com/2013/01/noahs_art-20130115-114149-png.jpg"><img src="http://alexp.files.wordpress.com/2013/01/noahs_art-20130115-114149-png.jpg?w=300" alt="Game Day 2: Things on screen" width="300" height="177" class="size-medium wp-image-21" /></a>Noah's Art Day 2: Things on screen[/caption]
+
+I started with LibGDX by working through [Tamas Jano's excellent "Getting Started in Android Game Development with libgdx"][9]. After a morning spent kicking the tires on LibGDX I started a new game project with a 720p screen targeting OpenGL 2.0 to match the [OUYA's specifications][10]. Now that I remembered how game loops worked, which LibGDX handles for you by repeatedly calling the [`render()`][render] function on your [`Screen`][screen] class, it was time to get to work. I easily ripped off the [Invaders sample code][background] to draw a temporary background image and rendered a temporary sprite at a fixed coordinate as a stand-in for a game object.
+
+[render]: http://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/Screen.html#render(float)
+[screen]: http://libgdx.badlogicgames.com/nightlies/docs/api/index.html?com/badlogic/gdx/Screen.html
+[background]: https://github.com/libgdx/libgdx/blob/master/demos/invaders/gdx-invaders/src/com/badlogic/gdxinvaders/RendererGL20.java#L197
+[9]: http://obviam.net/index.php/getting-started-in-android-game-development-with-libgdx-create-a-working-prototype-in-a-day-tutorial-part-1/
+[10]: https://devs.ouya.tv/developers/docs/setup
+
+The first task was getting a cursor to display on screen, as the player will manipulate wandering animals with a cursor controlled with one of the OUYA controller thumbsticks. I added support for the OUYA controller using LibGDX's new [controller support][11] (I also added mouse controls for LibGDX's desktop mode for development testing). It turns out getting controller state in LibGDX is pretty easy: on every game loop just check where the stick is and set the cursor's velocity accordingly, then update its location based on that velocity. The stick axis value is a fraction between -1 and 1 to denote all the way down or all the way up:
+
+[gist https://gist.github.com/4562537 file=process-input.java]
+
+The > 0.2 check is to account for sticks not quite going back to center, a common problem.
+
+[11]: http://www.badlogicgames.com/wordpress/?p=2724
+
+After that it's a simple matter of drawing the cursor at its new location:
+
+[gist https://gist.github.com/4562537 file=render-example.java]
+
+Voilà! You've got a cursor you can move with the thumbstick. Now, about that fixed temporary game object ... tomorrow: things that move!

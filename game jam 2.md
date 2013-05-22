@@ -1,0 +1,24 @@
+As <s>feared</s> expected, getting our game done in time for a deadline of January 23rd took precedence over writing about all the problems I ran into while making it. However, I'm still going to write about the experience here because I feel keeping a record of my journey of discovery will help and inspire future generations of would-be game creators who already know how to program.
+
+When I last left off, [I had a cursor on screen][last], and a [pandacat][pandacat] at a fixed location. My next step was to **get the pandas to move**. Since we knew a central part of gameplay was going to be coaxing animals around obstacles to a specific location, [Josh][josh] suggested I look into A* search. I vaguely recalled [having studied A* in college][ai] and wound up following the excellent article [A* Pathfinding for Beginners][astar]. The first hurdle I had to cross was deciding the level of detail for my A* grid: our game targets 720p and 1080p TV resolutions,[^resolutions] but since this game has  to run on a decent-but-not-amazing Android device which I have no way of testing with, I figured trying to search pixel-by-pixel was going to use more memory than we had available (not to mention time). So I decided to pick an arbitrary reasonable size and landed on 160x90: I figured 10x the aspect ratio of 16:9 would probably give us enough detail.
+
+So, uh, how do I keep track of where the animals can walk and where they can't?
+
+The LibGDX sample apps came to the rescue again: the Cuboc demo [does something very clever][cuboc-code] to build its level map: it loads a PNG and builds its in-memory level information based on the color values of the pixels in the image. This is probably common practice for a lot of game-dev folks, but this was a new approach to me and struck me as very clever. So I copied it. I made a simple black-and-white image, 160x90 pixels, which showed roughly where the barriers were in our temporary game level. Then I just loaded it into a giant boolean array of arrays in memory (14,400 booleans doesn't actually take up much memory, thankfully).
+
+------------------image here--------------
+
+[gist https://gist.github.com/4661320]
+
+Now that I knew which grid points where invalid, I could skip them when doing A* searching. Once I fixed a few[^few] bugs in my A* implementation, I could miraculously draw paths out of grid squares from an animal to an arbitrary location on screen, avoiding obstacles:
+
+Now, I just had to figure out how to tell the animals to move along the path. This turned out to be quite a bit harder than expected, because as I soon learned, I couldn't remember *anything at all* about **geometry**. Next time: **VECTOR MATH**.
+
+[last]: http://alexp.wordpress.com/2013/01/18/ouya-game-jam-the-start/
+[pandacat]: http://imgur.com/gallery/iVZC8
+[josh]: http://joshleejosh.com/
+[ai]: http://www-inst.eecs.berkeley.edu/~cs188/fa07/lectures.html
+[astar]: http://www.policyalmanac.org/games/aStarTutorial.htm
+[^resolutions]: That would be 1280x720 and 1920x1080 respectively.
+[cuboc-code]: https://github.com/libgdx/libgdx/blob/master/demos/cuboc/cuboc/src/com/badlogic/cubocy/Map.java#L34
+[^few]: okay, a lot
