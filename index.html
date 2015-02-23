@@ -1,0 +1,46 @@
+---
+layout: index
+title: Alex Pretzlav gitblog
+is_homepage: true
+---
+{% include JB/setup %}
+
+<div class="row">
+  <div class="col-md-12">
+  {% for post in paginator.posts %}
+    <div class="post">
+      <div class="frontmatter">
+        <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
+        <div class="date"><small>{{ post.date | date_to_long_string }}</small></div>
+      </div>
+      <div class="content">
+        {{ post.content }}
+      </div>
+    </div>
+    <hr>
+  {% endfor %}
+
+      <!-- Pagination links -->
+    <ul class="pagination">
+      {% if paginator.previous_page %}
+        <li><a href="{{ paginator.previous_page_path }}" class="previous">&larr; Previous</a></li>
+      {% endif %}
+      {% if paginator.next_page %}
+        <li><a href="{{ paginator.next_page_path }}" class="next">Next</a> &rarr;</li>
+      {% endif %}
+    </ul>
+
+  </div>
+</div>
+
+
+{% comment %}
+<!-- Old code from jekyll bootstrap -->
+<ul class="posts">
+  {% for post in pagintor.posts %}
+    <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a></li>
+  {% endfor %}
+</ul>
+{% endcomment %}
+
+

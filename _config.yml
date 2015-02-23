@@ -1,20 +1,28 @@
 # This is the default format. 
 # For more see: https://github.com/mojombo/jekyll/wiki/Permalinks
-permalink: /:categories/:year/:month/:day/:title 
+permalink: pretty
 
 exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
-auto: true
-pygments: true
+highlighter: pygments
+paginate: 8
+paginate_path: "page:num/"
+markdown: redcarpet
+
+redcarpet: 
+  extensions: ['smart', 'footnotes', 'highlight', 'autolink', 'no_intra_emphasis', 'tables']
 
 # Themes are encouraged to use these universal variables 
 # so be sure to set them if your theme uses them.
 #
-title : Alex Pretzlav Instablog
+title : Alex Pretzlav
 author :
   name : Alex Pretzlav
   email : alex@turnlav.net
   github : pretz
   twitter : apretz
+
+atom_path: atom.xml
+rss_path: rss.xml
 
 # The production_url is only used when full-domain names are needed
 # such as sitemap.txt 
@@ -25,6 +33,19 @@ author :
 # Finally if you are pushing to a GitHub project page, include the project name at the end.
 #
 production_url : http://pretz.github.io/blog/
+
+baseurl: /blog
+
+defaults:
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+
+gems:
+  - octopress-autoprefixer
 
 # All Jekyll-Bootstrap specific configurations are namespaced into this hash
 #
@@ -53,7 +74,7 @@ JB :
   #   - Only the following values are falsy: ["", null, false]
   #   - When setting BASE_PATH it must be a valid url.
   #     This means always setting the protocol (http|https) or prefixing with "/"
-  BASE_PATH : http://pretz.github.io/blog/
+
 
   # By default, the asset_path is automatically defined relative to BASE_PATH plus the enabled theme.
   # ex: [BASE_PATH]/assets/themes/[THEME-NAME]
@@ -68,9 +89,9 @@ JB :
   # These paths are to the main pages Jekyll-Bootstrap ships with.
   # Some JB helpers refer to these paths; change them here if needed.
   #
-  archive_path: /archive.html
-  categories_path : /categories.html
-  tags_path : /tags.html
+  archive_path: /archive/
+  categories_path : /categories/
+  tags_path : /tags/
   atom_path : /atom.xml
   rss_path : /rss.xml
 
@@ -91,7 +112,7 @@ JB :
       num_posts: 5
       width: 580
       colorscheme: light
-   
+
   # Settings for analytics helper
   # Set 'provider' to the analytics provider you want to use.
   # Set 'provider' to false to turn analytics off globally.
