@@ -16,18 +16,15 @@
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <!-- Le styles -->
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> -->
-    <!-- <link href="{{ ASSET_PATH }}/bootstrap/css/bootstrap.2.2.2.min.css" rel="stylesheet"> -->
     <link href="{{ site.asset_path }}/css/bigfoot-default.css" rel="stylesheet" type="text/css" media="all">
-
-    <link href="{{ site.asset_path }}/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link href="{{ site.asset_path }}/css/style.css" rel="stylesheet" type="text/css" media="all">
     <link href="{{ site.asset_path }}/css/syntax.css" rel="stylesheet" type="text/css" media="all">
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
     <script type="text/javascript" src="{{ site.asset_path }}/js/bigfoot.min.js"></script>
+
     {% comment %} Google Fontz!! {% endcomment %}
-    <link href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic|Inconsolata:400,700' 
+    <link href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic|Inconsolata:400' 
       rel='stylesheet' type='text/css'>
 
     {% raw %}
@@ -39,14 +36,6 @@
     </script>
     {% endraw %}
 
-    <!-- Le fav and touch icons -->
-  <!-- Update these with your own images
-    <link rel="shortcut icon" href="images/favicon.ico">
-    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
-  -->
-
     <!-- atom & rss feed -->
     <link href="{{ site.baseurl }}{{ site.atom_path }}" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
     <link href="{{ site.baseurl }}{{ site.rss_path }}" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
@@ -54,23 +43,6 @@
   </head>
 
   <body>
-    {% comment %}
-    <nav class="navbar navbar-default">
-        <div class="container">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="{{ HOME_PATH }}">{{ site.title }}</a>
-          </div>
-
-          <div class="navbar-collapse" id="lolcollapse">
-            <ul class="nav navbar-nav">
-              {% assign pages_list = site.pages %}
-              {% assign group = 'navigation' %}
-              {% include JB/pages_list %}
-            </ul>
-          </div>
-        </div>
-    </nav>
-    {% endcomment %}
     <div class="container">
       <div class="row pre-header">
         <div class="col-md-12">
@@ -108,13 +80,11 @@
       <div class="row">
         <footer class="col-md-12">
           <p>&copy; {{ site.time | date: '%Y' }} {{ site.author.name }}.<br>
-            This site started with <a href="http://twitter.github.com/bootstrap/" target="_blank">Bootstrap</a> and <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a> and evolved from there.
+            This site started with <a href="http://twitter.github.com/bootstrap/">Bootstrap 3</a> and <a href="http://jekyllbootstrap.com">Jekyll Bootstrap</a> and evolved from there.
           </p>
         </footer>
       </div>
-
     </div>
 
-    {% include JB/analytics %}
   </body>
 </html>
