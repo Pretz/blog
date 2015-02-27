@@ -67,10 +67,15 @@
           </h2>
           <p>I write apps for humans, love to cook, and tinker with electronics. I live in Austin, TX.</p>
           <ul>
-            <li><a href="https://twitter.com/apretz">@apretz</a></li>
-            <li><a href="https://github.com/Pretz">github</a></li>
-            <li><a href="http://apretz.tumblr.com">tumblr</a></li>
-            <li><a href="{{ site.baseurl }}{{ site.archive_path }}">post archive</a></li>
+            <li><a href="https://twitter.com/apretz" rel="me">@apretz</a></li>
+            <li><a href="https://github.com/Pretz" rel="me">github</a></li>
+            <li>
+            	{% if page.is_more %}
+            	more
+            	{% else %}
+	            <a href="{{ site.baseurl }}{{ site.archive_path }}">more</a>
+	            {% endif %}
+	        </li>
           </ul>
         </div>
       </div>

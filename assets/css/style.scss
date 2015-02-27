@@ -75,13 +75,15 @@ img {
 }
 
 code {
-  font-size: 12px;
-  font-family: $monospace;
-  line-height: 0.5;
+  font-family: $monospace; 
 }
 
 pre {
   font-family: $monospace;
+  code {
+    line-height: 0.5;
+    font-size: 12px;
+  }
 }
 
 body {

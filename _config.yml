@@ -9,7 +9,7 @@ paginate_path: "page:num/"
 markdown: redcarpet
 
 redcarpet: 
-  extensions: ['smart', 'footnotes', 'highlight', 'autolink', 'no_intra_emphasis', 'tables']
+  extensions: ['smart', 'footnotes', 'highlight', 'autolink', 'no_intra_emphasis', 'tables', 'disable_indented_code_blocks']
 
 # Themes are encouraged to use these universal variables 
 # so be sure to set them if your theme uses them.
