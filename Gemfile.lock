@@ -115,6 +115,7 @@ GEM
       ffi (>= 0.5.0)
     rdiscount (2.1.7)
     redcarpet (3.1.2)
+    rouge (1.6.2)
     safe_yaml (1.0.4)
     sass (3.4.11)
     terminal-table (1.4.5)
@@ -134,3 +135,4 @@ DEPENDENCIES
   github-pages (= 33)
   json
   octopress-autoprefixer
+  rouge (= 1.6.2)
