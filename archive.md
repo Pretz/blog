@@ -24,7 +24,7 @@ I have a <a href="http://apretz.tumblr.com" rel="me">tumblr</a> where I periodic
     <h3>{{this_month}}</h3>
     <ul>
   {% endif %}
-  <li><span>{{ post.date | date: "%B %e, %Y" }}</span> &raquo; <a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a></li>
+  <li><span>{{ post.date | date: "%B %e, %Y" }}</span> &raquo; <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
   {% if forloop.last %}
     </ul>
   {% else %}
