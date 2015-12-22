@@ -13,12 +13,12 @@ One of the features of Swift 1.2 I find most exciting is the addition of the `@n
 
 One of the places where the `self.` block requirement most frequently bothers me is in calls to `UIView.animateWithDuration`:
 
-```swift
+~~~ swift
 UIView.animateWithDuration(0.5, animations: {
     self.view1.frame.size.width += 200
     self.view2.frame.origin.x = self.view1.frame.maxX + 20
 })
-```
+~~~
 
 You can see in the debugger that the `animations` block passed to `animateWithDuration` is always executed synchronously, so it _should_ be compatible with `@noescape`, but I'm not holding my breath waiting for Apple to add it.
 
