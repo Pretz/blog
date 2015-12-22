@@ -32,10 +32,10 @@ Let's start with how I think my method definition should look:
 
 ```swift
 public func animateViews(
-    #duration: NSTimeInterval,
+    duration duration: NSTimeInterval,
     delay: NSTimeInterval = 0,
     options: UIViewAnimationOptions = .allZeros,
-    @noescape #animations: () -> Void,
+    @noescape animations: () -> Void,
     completion: (Bool -> Void)? = nil) {
 ```
 
@@ -69,11 +69,10 @@ Let's ignore the completion block for now and focus on setting up the basic anim
 
 ```swift
 public func animateViews(
-    #duration: NSTimeInterval,
+    duration duration: NSTimeInterval,
     delay: NSTimeInterval = 0,
     curve: UIViewAnimationCurve? = nil,
-    @noescape #animations: () -> Void,
-    completion: (Bool -> Void)? = nil) {
+    @noescape animations: () -> Void {
 
     UIView.beginAnimations(nil, context: nil)
 
@@ -89,7 +88,7 @@ public func animateViews(
 }
 ```
 
-I decided to only support animation curves rather than all of `UIViewAnimationOptions`. Most UIViewAnimationOptions can be implemented via UIView calls, but I find I very rarely use them.
+I decided to only support animation curves rather than all of `UIViewAnimationOptions`. Most `UIViewAnimationOptions` can be implemented via UIView calls, but I find I very rarely use them.
 
 ## The Completion Block
 
@@ -125,21 +124,20 @@ Finally, I need to instantiate an `AnimationDelegate` whenever a `completion` bl
 
 ```swift
 public func animateViews(
-    #duration: NSTimeInterval,
+    duration duration: NSTimeInterval,
     delay: NSTimeInterval = 0,
     curve: UIViewAnimationCurve? = nil,
-    @noescape #animations: () -> Void,
+    @noescape animations: () -> Void,
     completion: (Bool -> Void)? = nil) {
         
-        var wrapper: AnimationDelegate? = nil
-        if let completion = completion {
-            wrapper = AnimationDelegate(callback: completion)
-            delegates.insert(wrapper!)
-        }
         UIView.beginAnimations(nil, context: nil)
-        UIView.setAnimationDelegate(wrapper)
-        UIView.setAnimationDidStopSelector("animationDidStop:finished:context:")
-
+        
+        if let completion = completion {
+            let wrapper = AnimationDelegate(callback: completion)
+            delegates.insert(wrapper)
+            UIView.setAnimationDelegate(wrapper)
+            UIView.setAnimationDidStopSelector("animationDidStop:finished:context:")
+        }
         ...
 ```
 
