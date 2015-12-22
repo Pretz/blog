@@ -6,7 +6,11 @@ exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
 highlighter: rouge
 paginate: 8
 paginate_path: "page:num/"
-markdown: redcarpet
+markdown: kramdown
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
 
 redcarpet: 
   extensions: ['smart', 'footnotes', 'highlight', 'autolink', 'no_intra_emphasis', 'tables', 'disable_indented_code_blocks']
@@ -144,7 +148,7 @@ JB :
   #
   sharing :
     provider : false
-    
+
   # Settings for all other include helpers can be defined by creating 
   # a hash with key named for the given helper. ex:
   #
@@ -155,4 +159,3 @@ JB :
   # and include your custom code. Your custom file must be defined at:
   #   ./_includes/custom/[HELPER]
   # where [HELPER] is the name of the helper you are overriding.
-  
