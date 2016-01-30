@@ -172,6 +172,6 @@ OK, it really doesn't give you that much. If you look at [the files it generates
 
 ## Which which which?
 
-Honestly, I want a hybrid of `Natalie` and `R.swift`: I love the `Segue` inner enum Natalie uses to avoid repetitive boilerplate, but I really like the `TypedStoryboardSegueInfo` struct that `R.swift` constructs from a `UIStoryboardSegue`. It's also worth pointing out that all the libraries except `Natalie` allow you to choose which types of assets you want to generate code for, so it's perfectly reasonable to use a combination of libraries for different asset types.
+Honestly, I want a hybrid of `Natalie` and `R.swift`: I love the `Segue` inner enum Natalie uses to avoid repetitive boilerplate, but I really like the `TypedStoryboardSegueInfo` struct that `R.swift` constructs from a `UIStoryboardSegue`. It's also worth pointing out that `SwiftGen` allows you to choose which types of assets you want to generate code for, so it's perfectly reasonable to use a combination of libraries for different asset types.
 
-I think for now I'm going to give Natalie a shot on a few projects and see how it goes. If I really miss the typed segue features of `R`, maybe I'll submit a pull request.
+I think for now I'm going to give Natalie a shot on a few projects and see how it goes. If I really miss the typed segue features of `R.swift`, maybe I'll submit a pull request.
