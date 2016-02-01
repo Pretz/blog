@@ -1,4 +1,4 @@
-# This is the default format. 
+# This is the default format.
 # For more see: https://github.com/mojombo/jekyll/wiki/Permalinks
 permalink: pretty
 
@@ -12,10 +12,7 @@ kramdown:
   input: GFM
   syntax_highlighter: rouge
 
-redcarpet: 
-  extensions: ['smart', 'footnotes', 'highlight', 'autolink', 'no_intra_emphasis', 'tables', 'disable_indented_code_blocks']
-
-# Themes are encouraged to use these universal variables 
+# Themes are encouraged to use these universal variables
 # so be sure to set them if your theme uses them.
 #
 title : Alex Pretzlav
@@ -29,7 +26,7 @@ atom_path: atom.xml
 rss_path: rss.xml
 
 # The production_url is only used when full-domain names are needed
-# such as sitemap.txt 
+# such as sitemap.txt
 # Most places will/should use BASE_PATH to make the urls
 #
 # If you have set a CNAME (pages.github.com) set your custom domain here.
@@ -50,6 +47,8 @@ defaults:
 
 gems:
   - octopress-autoprefixer
+  - jekyll-paginate
+  - jekyll-gist
 
 exclude: ['bootstrap-sass', 'Gemfile', 'Gemfile.lock', 'Makefile']
 

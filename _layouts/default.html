@@ -40,6 +40,16 @@
     <link href="{{ site.baseurl }}{{ site.atom_path }}" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
     <link href="{{ site.baseurl }}{{ site.rss_path }}" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
 
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-6412874-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
   </head>
 
   <body>
@@ -48,7 +58,7 @@
         <div class="col-md-12">
           <div class="above"></div>
           <div class="inner">
-            {% if page.is_homepage %}
+            {% if page.is_homepage and paginator.previous_page == nil %}
               —
             {% else %}
               <a href="{{ site.baseurl }}/">—</a>
@@ -58,8 +68,8 @@
       </div>
       <div class="row header-title">
         <div class="col-md-12">
-          <h2>Hi, I'm 
-          {% if page.is_homepage %}
+          <h2>Hi, I'm
+          {% if page.is_homepage and paginator.previous_page == nil %}
           Alex Pretzlav
           {% else %}
           <a href="{{ site.baseurl }}/">Alex Pretzlav</a>

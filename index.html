@@ -25,21 +25,11 @@ is_homepage: true
         <li><a href="{{ paginator.previous_page_path }}" class="previous">&larr; Previous</a></li>
       {% endif %}
       {% if paginator.next_page %}
-        <li><a href="{{ paginator.next_page_path }}" class="next">Next</a> &rarr;</li>
+        <li><a href="{{ paginator.next_page_path }}" class="next">Next &rarr;</a></li>
       {% endif %}
     </ul>
 
   </div>
 </div>
-
-
-{% comment %}
-<!-- Old code from jekyll bootstrap -->
-<ul class="posts">
-  {% for post in pagintor.posts %}
-    <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a></li>
-  {% endfor %}
-</ul>
-{% endcomment %}
 
 

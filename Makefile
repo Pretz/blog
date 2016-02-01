@@ -13,6 +13,6 @@ deploy: build perms
 	rsync -aP _site/ turnlav@alex.turnlav.net:alex.turnlav.net/blog/
 
 serve:
-	bundle exec jekyll serve --drafts --baseurl ''
+	bundle exec jekyll serve --incremental --drafts --baseurl ''
 
 server: serve
