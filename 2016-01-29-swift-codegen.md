@@ -15,6 +15,7 @@ I tried out four popular projects which support Storyboards and Segues, plus the
 
 [^shark]: I've left the popular [Shark][Shark] library off of this list because it _only_ handles images, which are also handled by most of these libraries.
 
+<div class="table-responsive" markdown="1">
 | -- 
 | Library | Type Safe(ish) | Images | Localized Strings | Colors | Reuse Identifiers | Fonts |
 | ------------------- |:-: | :----: | :-----:| :---:|:-:|:-:|
@@ -24,6 +25,7 @@ I tried out four popular projects which support Storyboards and Segues, plus the
 | [objc-codegenutils] | ❌ | ✔      | ❌     | ✔   | ❌| ❌|
 | --
 {: .table .table-condensed .table-striped}
+</div>
 
 [^seg]: and segues
 [SwiftGen]: https://github.com/AliSoftware/SwiftGen
