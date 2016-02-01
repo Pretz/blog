@@ -20,7 +20,6 @@ I have a <a href="http://apretz.tumblr.com" rel="me">tumblr</a> where I periodic
 
   {% if forloop.first %}
     <h3 class="page-header">{{this_year}}</h3>
-    <h4>{{this_month}}</h4>
     <ul>
   {% endif %}
 
@@ -32,12 +31,10 @@ I have a <a href="http://apretz.tumblr.com" rel="me">tumblr</a> where I periodic
     {% if this_year != next_year %}
       </ul>
       <h3 class="page-header">{{next_year}}</h3>
-      <h4>{{next_month}}</h4>
       <ul>
     {% else %}    
       {% if this_month != next_month %}
         </ul>
-        <h3>{{next_month}}</h3>
         <ul>
       {% endif %}
     {% endif %}
