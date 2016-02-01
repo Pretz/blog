@@ -63,6 +63,10 @@ override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 }
 ~~~
 
+There are several things I don't like about this approach. First, the segue identifier `"ImageView"` is a string. If the identifier changes in the storyboard, the code will crash at runtime. If the segue is moved to a different view controller, runtime crash. Code copied and pasted somewhere else? Runtime crash.
+
+That `default: break` in the `switch` is annoying too. There's a fixed set of segues defined on this view controller in the storyboard, and the compiler should know which ones those are.
+
 ## SwiftGen
 
 I started with SwiftGen, as it looked like it would have the best combination of features and type-safety I was looking for.
@@ -75,7 +79,7 @@ Here's `performSegue` using SwiftGen's generated identifier enum:
 }
 ```
 
-The `Main` there is the name of the storyboard where the segue is defined.
+The `Main` there is the name of the storyboard file where the segue is defined.
 
 and `prepareForSegue`:
 
@@ -94,9 +98,9 @@ override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 ```
 
 
-There are a few things to note here that stand out to me. First, I have to force unwrap `segue.identifier`, even though `Main(rawValue:)` returns an optional. A helper initializer could have avoided that slight wart.
+There are a few things to note here that stand out to me. First, I have to force unwrap `segue.identifier`, even though `Main(rawValue:)` returns an optional. A helper initializer could have avoided that wart.
 
-The main thing bugging me is that `default:` entry in the switch statement. It turns out SwiftGen lumps all the segues in a storyboard in to one `enum`. Since there will usually be different segues on different view controllers in one storyboard, a `default:` case will pretty much always be needed, which loses a lot of the compile time help enums are supposed to provide.
+The main thing bugging me is the `default:` entry in the switch statement. It turns out SwiftGen lumps the segues in each storyboard file in to one `enum`. Since there will usually be different segues on different view controllers in one storyboard, a `default:` case will pretty much always be needed, which loses a lot of the compile time help enums are supposed to provide.
 
 ## Natalie
 
@@ -118,11 +122,11 @@ override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 }
 ```
 
-Now this is getting somewhere. `Segue` is an enum defined as an internal class on the current view controller, so _only segues this view controller supports are present_. That means if I change the class of the view controller in the storyboard, this code will _rightfully_ break. Also, Xcode's code completion only offers me segues defined on this view controller in the storyboard. No `default:` clause is needed on the switch for the same reason. There's a guard here because `segue.selection()` returns an optional, but that seems a small price to pay for the compiler knowing about the possible segues.
+Now this is getting somewhere. `Segue` is an enum defined as an internal class on the current view controller, so _only segues this view controller supports are present_. That means if I change the class of the view controller in the storyboard, this code will rightfully break. Also, Xcode's code completion only offers me segues defined on this view controller in the storyboard. No `default:` clause is needed on the switch for the same reason. There's a guard here because `segue.selection()` returns an optional, but that seems a small price to pay for the compiler knowing about the possible segues.
 
 ## R.swift
 
-At first `R.swift` didn't look like it had as strong type support., but it has just about the same number of stars on github as `SwiftGen` and I liked using the `R` system when I did Android development.
+At first `R.swift` didn't look like it had as strong type support as the other two. It has just about the same number of stars on github as `SwiftGen` and I liked using the `R` system when I did Android development, so I gave it a shot.
 
 ```swift
 @IBAction func rButtonPressed(sender: AnyObject) {
@@ -130,7 +134,7 @@ At first `R.swift` didn't look like it had as strong type support., but it has j
 }
 ```
 
-Actually, this is pretty clever. Even though I could call this segue from any view controller, if I _move the segue in the storyboard_, the compiler will catch it. If I copy and paste this code to a different view controller class, though, it'll crash at runtime.
+This is pretty clever. Even though I could call this segue from any view controller, if I move or rename the segue in the storyboard, the compiler will catch it. If I copy and paste this code to a different view controller class, though, it'll crash at runtime.
 
 ```swift
 override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -141,9 +145,11 @@ override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 }
 ```
 
-R.swift takes a different approach to `UIStoryboardSegue`: it generates structs instead of enums. `R.segue.detailViewController.imageView` is smartly returns an optional struct which if present contains correctly typed view controller references. This avoids that annoying cast in all the other examples!
+`R.swift` takes a different approach to `UIStoryboardSegue`: it generates structs instead of enums. `R.segue.detailViewController.imageView`[^1] smartly returns an optional struct which if present contains correctly typed view controller references. This avoids that annoying cast in all the other examples!
 
-R.swift gives an interesting tradeoff: while it doesn't provide compiler-checked enum cases, it gives other ways to improve interaction with the type system and avoid unsafe casts.
+[^1]: `imageView` is generated from the segue identifier: `ImageView`
+
+`R.swift` gives an interesting tradeoff: while it doesn't provide compiler-checked enum cases, it gives other ways to improve interaction with the type system and avoid unsafe casts.
 
 ## objc-codegenutils
 
@@ -168,10 +174,10 @@ override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 }
 ```
 
-OK, it really doesn't give you that much. If you look at [the files it generates](https://github.com/Pretz/SwiftCodeGenUtils/blob/master/CodeGenExample/MainStoryboardIdentifiers.m) you can see how minimal it is. This is probably barely OK for an obj-c project, but in Swift I want something better.
+OK, it really doesn't give you that much. If you look at [the files it generates](https://github.com/Pretz/SwiftCodeGenUtils/blob/master/CodeGenExample/MainStoryboardIdentifiers.m) you can see how minimal it is. This is an acceptable improvement for an obj-c project, but in Swift I want something better.
 
 ## Which which which?
 
-Honestly, I want a hybrid of `Natalie` and `R.swift`: I love the `Segue` inner enum Natalie uses to avoid repetitive boilerplate, but I really like the `TypedStoryboardSegueInfo` struct that `R.swift` constructs from a `UIStoryboardSegue`. It's also worth pointing out that `SwiftGen` allows you to choose which types of assets you want to generate code for, so it's perfectly reasonable to use a combination of libraries for different asset types.
+I want a hybrid of `Natalie` and `R.swift`: I love the `Segue` inner enum Natalie uses to avoid repetitive boilerplate, but I really like the `TypedStoryboardSegueInfo` struct that `R.swift` constructs from a `UIStoryboardSegue`. It's also worth pointing out that `SwiftGen` allows you to choose which types of assets you want to generate code for, so it's perfectly reasonable to use a combination of libraries for different asset types.
 
 I think for now I'm going to give Natalie a shot on a few projects and see how it goes. If I really miss the typed segue features of `R.swift`, maybe I'll submit a pull request.
