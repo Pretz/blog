@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Let's Build UIView.animateWithDuration in Swift
+title: Let's Build UIView.&#8203;animate&#8203;With&#8203;Duration in Swift
 tags : [programming]
 ---
 
