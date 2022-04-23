@@ -2,7 +2,7 @@
 # For more see: https://github.com/mojombo/jekyll/wiki/Permalinks
 permalink: pretty
 
-exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
+exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md", "vendor"]
 highlighter: rouge
 paginate: 8
 paginate_path: "page:num/"
@@ -45,12 +45,12 @@ defaults:
     values:
       layout: "post"
 
-gems:
+configuration:
   - octopress-autoprefixer
   - jekyll-paginate
   - jekyll-gist
 
-exclude: ['bootstrap-sass', 'Gemfile', 'Gemfile.lock', 'Makefile']
+exclude: ['bootstrap-sass', 'Gemfile', 'Gemfile.lock', 'Makefile', "vendor"]
 
 archive_path: /archive/
 categories_path: /categories/
