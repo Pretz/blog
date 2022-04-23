@@ -1,16 +1,15 @@
 ---
 layout: page
 header : Alex Pretzlav
-is_more: true
+is_homepage: true
 ---
 
-I grew up in Venice, CA, went to [high school](http://xrds.org/) in Santa Monica, got a BA in Computer Science at Berkeley, lived in SF, worked for Yelp, moved to Austin, after a year or so joined up with [Silvercar](https://www.silvercar.com/). Now I'm doing freelance iOS work and tinkering with a host of sideprojects.
+I work as an iOS engineer at Twitter, Inc. You can find my Tweets at the link above, and can find me by name on plenty of other sites. You can email me at alex at this domain.
 
-I have a <a href="http://apretz.tumblr.com" rel="me">tumblr</a> where I periodically post inscrutable quotes.
-
+Maybe one day I'll write a new blog post. Not today.
 
 <div>
-<h1>All Posts</h1>
+<h1>Blog Posts</h1>
 
 {% for post in site.posts  %}
   {% capture this_year %}{{ post.date | date: "%Y" }}{% endcapture %}

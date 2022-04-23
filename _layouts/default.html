@@ -58,7 +58,7 @@
         <div class="col-md-12">
           <div class="above"></div>
           <div class="inner">
-            {% if page.is_homepage and paginator.previous_page == nil %}
+            {% if page.is_homepage %}
               —
             {% else %}
               <a href="{{ site.baseurl }}/">—</a>
@@ -69,7 +69,7 @@
       <div class="row header-title">
         <div class="col-md-12">
           <h2>Hi, I'm
-          {% if page.is_homepage and paginator.previous_page == nil %}
+          {% if page.is_homepage %}
           Alex Pretzlav
           {% else %}
           <a href="{{ site.baseurl }}/">Alex Pretzlav</a>
@@ -80,10 +80,10 @@
             <li><a href="https://twitter.com/apretz" rel="me">@apretz</a></li>
             <li><a href="https://github.com/Pretz" rel="me">github</a></li>
             <li>
-            	{% if page.is_more %}
-            	more
+            	{% if page.is_blogpage %}
+            	blog
             	{% else %}
-	            <a href="{{ site.baseurl }}{{ site.archive_path }}">more</a>
+	            <a href="{{ site.baseurl }}{{ site.blog_path }}">blog</a>
 	            {% endif %}
 	        </li>
           </ul>
