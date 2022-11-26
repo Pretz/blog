@@ -4,7 +4,7 @@ header : Alex Pretzlav
 is_homepage: true
 ---
 
-I work as an iOS engineer at Twitter, Inc. You can find my Tweets at the link above, and can find me by name on plenty of other sites. You can email me at alex at this domain.
+I've been writing iOS apps since 2009. You can find me by name on plenty of other sites. You can email me at alex at this domain.
 
 Maybe one day I'll write a new blog post. Not today.
 
