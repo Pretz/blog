@@ -6,10 +6,10 @@ is_homepage: true
 
 I've been writing iOS apps since 2009. You can find me by name on plenty of other sites. You can email me at alex at this domain.
 
-Maybe one day I'll write a new blog post. Not today.
+I wrote a blog post in 2024! I'm pretty proud of that.
 
 <div>
-<h1>Blog Posts</h1>
+<h2>Posts</h2>
 
 {% for post in site.posts  %}
   {% capture this_year %}{{ post.date | date: "%Y" }}{% endcapture %}
@@ -18,24 +18,16 @@ Maybe one day I'll write a new blog post. Not today.
   {% capture next_month %}{{ post.previous.date | date: "%B" }}{% endcapture %}
 
   {% if forloop.first %}
-    <h3 class="page-header">{{this_year}}</h3>
     <ul>
   {% endif %}
-
-  <li><span>{{ post.date | date: "%B %e, %Y" }}</span> &raquo; <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
-
+      <li><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a> <span>{{ post.date | date: "%B %e, %Y" }}</span></li>
   {% if forloop.last %}
     </ul>
   {% else %}
     {% if this_year != next_year %}
       </ul>
-      <h3 class="page-header">{{next_year}}</h3>
+      <hr>
       <ul>
-    {% else %}    
-      {% if this_month != next_month %}
-        </ul>
-        <ul>
-      {% endif %}
     {% endif %}
   {% endif %}
 {% endfor %}
