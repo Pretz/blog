@@ -10,7 +10,7 @@ newpost:
 	echo ${HEADER} >> "_posts/${LOL}"
 
 deploy: build perms
-	rsync -aP _site/ turnlav@alex.turnlav.net:alex.turnlav.net/blog/
+	rsync -aP _site/ wetzel@pretzlav.com:pretzlav.com/blog/
 
 serve:
 	bundle exec jekyll serve --incremental --drafts --baseurl ''

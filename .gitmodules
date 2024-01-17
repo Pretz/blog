@@ -1,6 +1,6 @@
 [submodule "_posts"]
 	path = _posts
-	url = https://github.com/Pretz/blog.git
+	url = git@github.com:Pretz/blog.git
 [submodule "bootstrap-sass"]
 	path = bootstrap-sass
 	url = https://github.com/twbs/bootstrap-sass.git
