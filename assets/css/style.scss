@@ -4,6 +4,7 @@
 $monospace: 'Inconsolata', Menlo, Courier, monospace;
 $font-family-sans-serif: 'Noto Sans', Verdana, Helvetica sans-serif;
 $brand-primary: #D1503D;
+$brand-primary-dark: #cd6152;
 
 @import "bootstrap";
 
@@ -200,3 +201,89 @@ body {
   background: #57A957;
   border: 1px solid #4c964d;
   color: #FFF; }
+
+  /* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+  /* Body and general text color */
+  body {
+    background-color: #222; /* Dark background */
+    color: #eee; /* Light text */
+  }
+
+  /* Links */
+  a, a:link, a:hover {
+   color: $brand-primary-dark; /* Lighter orange */
+  }
+
+  /* Code blocks */
+  .highlight pre, .highlighter-rouge pre {
+    background-color: #333; /* Darker background for code blocks */
+  }
+
+  code {
+    background-color: #333; /* Darker background for code blocks */
+    color: #d68176;
+  }
+
+  .pre-header .inner {
+    background-color: $brand-primary-dark;
+  }  
+
+  /* Header links */
+  .pre-header .inner a, .pre-header .inner a:link, .pre-header .inner a:hover {
+    color: #9cf; /* Light blue */
+  }
+
+  /* Horizontal ruler */
+  .post + hr {
+    border-top: 1px solid #555; /* Darker horizontal ruler */
+  }
+
+  /* Footer and footnote styles */
+  .bigfoot-footnote__button, .bigfoot-footnote__wrapper p {
+    color: #ccc; /* Light text */
+  }
+
+  .bigfoot-footnote, .bigfoot-footnote__tooltip  {
+    box-shadow: none;
+    border: none;
+  }
+
+  .bigfoot-footnote__content, .bigfoot-footnote__tooltip, .bigfoot-footnote__wrapper {
+    background-color: #393939;
+  }
+
+  /* Posts index */
+  .post {
+    background-color: #222; /* Darker background for posts */
+    color: #eee; /* Light text */
+  }
+
+  /* Tag box */
+  .tag_box a {
+    background: #444; /* Darker background for tags */
+    color: #ccc; /* Light text */
+    border: 1px dashed #888; /* Darker border */
+  }
+
+  .tag_box a:hover {
+    background-color: #666; /* Darker hover background */
+  }
+
+  .table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: #282828;
+  }
+
+  .table > thead > tr > th {
+    border-bottom: 2px solid #444;
+  }
+
+  .table > thead > tr > th, 
+  .table > thead > tr > td, 
+  .table > tbody > tr > th,
+   .table > tbody > tr > td, 
+   .table > tfoot > tr > th,
+    .table > tfoot > tr > td {
+    border-top: 1px solid #444;
+}
+}

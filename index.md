@@ -1,6 +1,6 @@
 ---
 layout: page
-header : Alex Pretzlav
+title: Alex Pretzlav
 is_homepage: true
 ---
 

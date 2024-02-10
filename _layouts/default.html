@@ -5,13 +5,35 @@
   <head>
     <meta charset="utf-8">
     <title>{{ page.title }}</title>
-    {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
-    <meta name="author" content="{{ site.author.name }}">
+    <meta content="{{ site.author.name }}" name="author">
+
+    <meta content="{{ site.production_url }}{{ page.url | replace:'index.html',''}}" property="og:url" >
+    <meta content="{{ site.title }}" property="og:site_name">
+    {%- if page.description -%}
+      <meta content="{{ page.description }}" property="og:description">
+      <meta content="{{ page.description }}" name="description">
+    {%- else -%}
+      <meta content="{{ site.description }}" property="og:description">
+    {%- endif -%}
+    {% if page.is_homepage %}
+      <meta content="website" property="og:type">
+    {% elsif page.title %}
+      <meta content="article" property="og:type">
+    {% else %}
+      <meta content="website" property="og:type">
+    {% endif %}
+    {%- if page.image -%}<meta property="og:image" content="{{ site.production_url }}{{ site.asset_path }}/img/{{ page.image }}">{%- endif -%}
+    {% if page.image_alt %}<meta property="og:image:alt" content="{{ page.image_alt }}">{% endif %}
+
+    {%- if page.date -%}
+      <meta content="{{ page.date | date_to_xmlschema }}" property="article:published_time">
+      <meta content="{{ site.production_url }}" property="article:author">
+    {%- endif -%}
 
     <link rel="me" href="https://macaw.social/@pretz">
     <link rel="me" href="https://mastodon.social/@pretz">
     <link rel="me" href="https://github.com/Pretz">
-
+    <link rel="me" href="https://www.threads.net/@apretz">
 
     <!-- Enable responsive viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
