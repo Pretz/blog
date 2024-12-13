@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Swift Asset Code Generators
-tags: [programming, swift]
+tags: [programming, swift, ios]
 description: A comparison of code generators for Swift
 ---
 
@@ -12,8 +12,6 @@ Programmers generally agree that using ["stringly-typed"][string] data is a reci
 [mogenerator]: https://rentzsch.github.io/mogenerator/
 
 I tried out four popular projects which support Storyboards and Segues, plus these other features: [^shark]
-
-[^shark]: I've left the popular [Shark][Shark] library off of this list because it _only_ handles images, which are also handled by most of these libraries.
 
 <div class="table-responsive" markdown="1">
 | -- 
@@ -26,13 +24,6 @@ I tried out four popular projects which support Storyboards and Segues, plus the
 | --
 {: .table .table-condensed .table-striped}
 </div>
-
-[^seg]: and segues
-[SwiftGen]: https://github.com/AliSoftware/SwiftGen
-[Shark]: https://github.com/kaandedeoglu/Shark
-[Natalie]: https://github.com/krzyzanowskim/Natalie
-[R.swift]: https://github.com/mac-cain13/R.swift
-[objc-codegenutils]: https://github.com/puls/objc-codegenutils
 
 When I say type safe, I'm specifically referring to storyboard segues: since segues with identifiers are tied to a specific view controller, it's possible to ensure the segue references are associated with the storyboard or view controller they are part of and push runtime crashes to become compiler crashes. 
 
@@ -52,7 +43,7 @@ There are two main Storyboard actions where I often use string based identifiers
 
 and
 
-~~~ swift
+```swift
 override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     switch segue.identifier {
     case "ImageView"?:
@@ -63,7 +54,7 @@ override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         break
     }
 }
-~~~
+```
 
 There are several things I don't like about this approach. First, the segue identifier `"ImageView"` is a string. If the identifier changes in the storyboard, the code will crash at runtime. If the segue is moved to a different view controller, runtime crash. Code copied and pasted somewhere else? Runtime crash.
 
@@ -98,7 +89,6 @@ override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     }
 }
 ```
-
 
 There are a few things to note here that stand out to me. First, I have to force unwrap `segue.identifier`, even though `Main(rawValue:)` returns an optional. A helper initializer could have avoided that wart.
 
@@ -149,8 +139,6 @@ override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 
 `R.swift` takes a different approach to `UIStoryboardSegue`: it generates structs instead of enums. `R.segue.detailViewController.imageView`[^1] smartly returns an optional struct which if present contains correctly typed view controller references. This avoids that annoying cast in all the other examples!
 
-[^1]: `imageView` is generated from the segue identifier: `ImageView`
-
 `R.swift` gives an interesting tradeoff: while it doesn't provide compiler-checked enum cases, it gives other ways to improve interaction with the type system and avoid unsafe casts.
 
 ## objc-codegenutils
@@ -183,3 +171,14 @@ OK, it really doesn't give you that much. If you look at [the files it generates
 I want a hybrid of `Natalie` and `R.swift`: I love the `Segue` inner enum Natalie uses to avoid repetitive boilerplate, but I really like the `TypedStoryboardSegueInfo` struct that `R.swift` constructs from a `UIStoryboardSegue`. It's also worth pointing out that `SwiftGen` allows you to choose which types of assets you want to generate code for, so it's perfectly reasonable to use a combination of libraries for different asset types.
 
 I think for now I'm going to give Natalie a shot on a few projects and see how it goes. If I really miss the typed segue features of `R.swift`, maybe I'll submit a pull request.
+
+[^shark]: I've left the popular [Shark][Shark] library off of this list because it _only_ handles images, which are also handled by most of these libraries.
+
+[^seg]: and segues
+[SwiftGen]: https://github.com/AliSoftware/SwiftGen
+[Shark]: https://github.com/kaandedeoglu/Shark
+[Natalie]: https://github.com/krzyzanowskim/Natalie
+[R.swift]: https://github.com/mac-cain13/R.swift
+[objc-codegenutils]: https://github.com/puls/objc-codegenutils
+
+[^1]: `imageView` is generated from the segue identifier: `ImageView`
