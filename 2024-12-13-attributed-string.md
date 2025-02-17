@@ -4,7 +4,6 @@ title: Custom Attributes in Swift AttributedString and NSAttributedString
 tags: [programming, swift, ios]
 description: How to define custom attributes for attributed strings and preserve them when converting between attributed string types.
 ---
-
 In a reasonably sized iOS app, it can often be convenient to add custom attributes to [NSAttributedStrings](https://developer.apple.com/documentation/foundation/nsattributedstring) to pass additional metadata for whatever reason associated with a specific part of a string. ([Previously in my AttributedString adventures](https://mastodon.social/@pretz/110387345531733187))
 
 This is straightforward with NSAttributedString since its attributes are a dictionary that can hold anything (I'm ignoring serialization here). You add your own key to NSAttributedString.Key, and go:
