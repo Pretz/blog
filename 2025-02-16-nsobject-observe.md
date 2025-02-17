@@ -70,7 +70,7 @@ extension _KeyValueCodingAndObserving {
         -> NSKeyValueObservation {
 ```
 
-This is the key to this technique: the method taking a keypath must be defined in a protocol extension, which allows `Self` to refer to static type of the reference the method is called on. Indeed, by moving over to a protocol extension, my `get` example works too:
+This is the key to this technique: the method taking a KeyPath must be defined in a protocol extension, which allows `Self` to refer to the static type of the instance at the time the method is called. Indeed, by moving over to a protocol extension, my `get` example works too:
 
 ```swift
 protocol GetWithKeypath { }
